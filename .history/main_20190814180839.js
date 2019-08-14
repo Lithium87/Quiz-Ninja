@@ -81,12 +81,11 @@ const game = {
     gameOver() {
         view.render(view.info, `Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`)
         view.teardown();
-        clearInterval(this.timer);
     },
     countdown() {
         game.secondsRemaining--;
         view.render(view.timer, game.secondsRemaining);
-        if (game.secondsRemaining <= 0) {
+        if (game.secondsRemaining < 0) {
             game.gameOver();
         }
     }

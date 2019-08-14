@@ -86,7 +86,7 @@ const game = {
     countdown() {
         game.secondsRemaining--;
         view.render(view.timer, game.secondsRemaining);
-        if (game.secondsRemaining <= 0) {
+        if (game.secondsRemaining < 0) {
             game.gameOver();
         }
     }
