@@ -23,25 +23,6 @@ const view = {
     },
     hide(element) {
         element.style.display = 'none';
-    },
-    setup() {
-        this.show(this.question);
-        this.show(this.response);
-        this.show(this.result);
-        this.hide(this.start);
-        this.render(this.score, game.score);
-        this.render(this.result, '');
-        this.render(this.info, '');
-        this.resetForm();
-    },
-    resetForm() {
-        this.response.answer.value = '';
-        this.response.answer.focus();
-    },
-    teardown() {
-        this.hide(this.question);
-        this.hide(this.response);
-        this.show(this.start);
     }
 };
 
@@ -49,7 +30,6 @@ const game = {
     start(quiz) {
         this.questions = [...quiz];
         this.score = 0;
-        view.setup();
         this.ask();
     },
     ask() {
@@ -72,12 +52,10 @@ const game = {
         } else {
             view.render(view.result, `Wrong! The correct answer was ${answer}!`, { "class": "wrong" })
         }
-        view.resetForm();
         this.ask();
     },
     gameOver() {
-        view.render(view.info, `Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`)
-        view.teardown();
+        alert(`Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`);
     }
 }
 

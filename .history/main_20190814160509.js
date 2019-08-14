@@ -76,7 +76,7 @@ const game = {
         this.ask();
     },
     gameOver() {
-        view.render(view.info, `Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`)
+        alert(`Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`);
         view.teardown();
     }
 }
