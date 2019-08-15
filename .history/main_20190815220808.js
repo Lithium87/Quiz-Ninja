@@ -1,10 +1,7 @@
 const quiz = [
     { name: "Superman", realName: "Clark Kent" },
     { name: "Wonder Woman", realName: "Diana Prince" },
-    { name: "Batman", realName: "Bruce Wayne" },
-    { name: "The Hulk", realName: "Bruce Banner" },
-    { name: "Spider-man", realName: "Peter Parker" },
-    { name: "Cyclops", realName: "Scott Summers" }
+    { name: "Batman", realName: "Bruce Wayne" }
 ];
 
 function random(a, b = 1) {
@@ -58,7 +55,7 @@ const view = {
         this.show(this.start);
     },
     buttons(array) {
-        return array.map(value => `<button>${value}</button>`).join('');
+        return array.map(value => `<button>${value}</button>`.join(''));
     }
 };
 
@@ -72,6 +69,7 @@ const game = {
         this.timer = setInterval(this.countdown, 1000);
     },
     ask(name) {
+        console.log('ask() invoked');
         if (this.questions.length > 2) {
             shuffle(this.questions);
             this.question = this.questions.pop();
@@ -85,6 +83,7 @@ const game = {
         }
     },
     check(event) {
+        console.log('check(event) invoked');
         const response = event.target.textContent;
         const answer = this.question.realName;
         if (response === answer) {

@@ -72,6 +72,7 @@ const game = {
         this.timer = setInterval(this.countdown, 1000);
     },
     ask(name) {
+        console.log('ask() invoked');
         if (this.questions.length > 2) {
             shuffle(this.questions);
             this.question = this.questions.pop();
@@ -85,6 +86,7 @@ const game = {
         }
     },
     check(event) {
+        console.log('check(event) invoked');
         const response = event.target.textContent;
         const answer = this.question.realName;
         if (response === answer) {
