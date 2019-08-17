@@ -92,12 +92,12 @@ const game = {
             this.score++;
             view.render(view.score, this.score);
         } else {
-            view.render(view.result, `Wrong! The correct answer was ${answer}!`, { "class": "wrong" });
+            view.render(view.result, `Wrong! The correct answer was ${answer}!`, { "class": "wrong" })
         }
         this.ask();
     },
     gameOver() {
-        view.render(view.info, `Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`);
+        view.render(view.info, `Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`)
         view.teardown();
         clearInterval(this.timer);
     },
@@ -107,7 +107,16 @@ const game = {
         if (game.secondsRemaining <= 0) {
             game.gameOver();
         }
+    },
+    hiScore() {
+        const hi = localStorage.getItem('highScore') || 0;
+        if (this.score > hi || hi === 0) {
+            localStorage.setItem('highScore', this.score);
+            view.render(view.info, '** NEW HIGH SCORE! **');
+        }
+        return localStorage.getItem('highScore');
     }
 }
+
 view.start.addEventListener('click', () => game.start(quiz), false);
 view.response.addEventListener('click', (event) => game.check(event), false);

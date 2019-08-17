@@ -1,3 +1,4 @@
+/*
 const quiz = [
     { name: "Superman", realName: "Clark Kent" },
     { name: "Wonder Woman", realName: "Diana Prince" },
@@ -6,6 +7,15 @@ const quiz = [
     { name: "Spider-man", realName: "Peter Parker" },
     { name: "Cyclops", realName: "Scott Summers" }
 ];
+*/
+const url = 'http://spbooks.github.io/questions.json';
+
+fetch(url)
+    .then(res => res.json())
+    .then(quiz => {
+        view.start.addEventListener('click', () => game.start(quiz.questions), false);
+        view.response.addEventListener('click', (event) => game.check(event), false);
+    });
 
 function random(a, b = 1) {
     // if only one argument is provided, we need to swap the values of a and b
@@ -92,12 +102,12 @@ const game = {
             this.score++;
             view.render(view.score, this.score);
         } else {
-            view.render(view.result, `Wrong! The correct answer was ${answer}!`, { "class": "wrong" });
+            view.render(view.result, `Wrong! The correct answer was ${answer}!`, { "class": "wrong" })
         }
         this.ask();
     },
     gameOver() {
-        view.render(view.info, `Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`);
+        view.render(view.info, `Game Over! Your score: ${this.score} point${this.score !== 1 ? 's' : ''}`)
         view.teardown();
         clearInterval(this.timer);
     },
@@ -109,5 +119,6 @@ const game = {
         }
     }
 }
+
 view.start.addEventListener('click', () => game.start(quiz), false);
 view.response.addEventListener('click', (event) => game.check(event), false);
